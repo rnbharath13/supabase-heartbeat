@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""Simple Supabase keep-alive script.
+Run this in the background or via cron/scheduler to ping Supabase every 12 hours.
+Credentials loaded from environment variables (.env file).
+"""
+import os
+import time
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+API_KEY = os.getenv("SUPABASE_API_KEY")
+
+if not SUPABASE_URL or not API_KEY:
+    print("Error: Missing SUPABASE_URL or SUPABASE_API_KEY in .env file")
+    exit(1)
+
+headers = {
+    "apikey": API_KEY,
+    "Authorization": f"Bearer {API_KEY}",
+    "Content-Type": "application/json",
+}
+
+endpoint = f"{SUPABASE_URL}/rest/v1/system_config?select=key&limit=1"
+
+def ping_supabase():
+    try:
+        r = requests.get(endpoint, headers=headers, timeout=30)
+        print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] status={r.status_code}")
+        print(r.text)
+    except Exception as e:
+        print(f"Ping failed: {e}")
+
+if __name__ == "__main__":
+    while True:
+        ping_supabase()
+        # Sleep 12 hours
+        time.sleep(12 * 60 * 60)
