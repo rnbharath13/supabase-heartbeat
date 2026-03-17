@@ -2,7 +2,7 @@ name: Supabase Heartbeat Cron
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (testing)
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
