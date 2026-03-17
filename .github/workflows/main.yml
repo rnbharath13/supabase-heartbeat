@@ -22,4 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
         run: python keepalive.py
