@@ -6,6 +6,7 @@ Credentials loaded from environment variables (.env file).
 import os
 import time
 import requests
+import schedule
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -33,5 +34,13 @@ def ping_supabase():
     except Exception as e:
         print(f"Ping failed: {e}")
 
+def run_scheduler():
+    """Run scheduler that pings Supabase every 10 minutes."""
+    schedule.every(10).minutes.do(ping_supabase)
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Scheduler started. Pinging Supabase every 10 minutes...")
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 if __name__ == "__main__":
-    ping_supabase()
+    run_scheduler()
