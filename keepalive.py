@@ -36,7 +36,7 @@ def ping_supabase():
 
 def run_scheduler():
     """Run scheduler that pings Supabase every 5 minutes."""
-    schedule.every(5).minutes.do(ping_supabase)
+    schedule.every(10).minutes.do(ping_supabase)
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Scheduler started. Pinging Supabase every 5 minutes...")
     while True:
         schedule.run_pending()
