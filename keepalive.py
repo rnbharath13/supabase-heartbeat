@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Simple Supabase keep-alive script.
-Run this in the background or via cron/scheduler to ping Supabase every 10 minutes.
+Run this in the background or via cron/scheduler to ping Supabase every 5 minutes.
 Credentials loaded from environment variables (.env file).
 """
 import os
@@ -35,9 +35,9 @@ def ping_supabase():
         print(f"Ping failed: {e}")
 
 def run_scheduler():
-    """Run scheduler that pings Supabase every 10 minutes."""
-    schedule.every(10).minutes.do(ping_supabase)
-    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Scheduler started. Pinging Supabase every 10 minutes...")
+    """Run scheduler that pings Supabase every 5 minutes."""
+    schedule.every(5).minutes.do(ping_supabase)
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] Scheduler started. Pinging Supabase every 5 minutes...")
     while True:
         schedule.run_pending()
         time.sleep(1)
