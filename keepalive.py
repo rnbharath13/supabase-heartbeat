@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Simple Supabase keep-alive script.
-Run this in the background or via cron/scheduler to ping Supabase every 12 hours.
+Run this in the background or via cron/scheduler to ping Supabase every 10 minutes.
 Credentials loaded from environment variables (.env file).
 """
 import os
@@ -23,7 +23,7 @@ headers = {
     "Content-Type": "application/json",
 }
 
-endpoint = f"{SUPABASE_URL}/rest/v1/system_config?select=key&limit=1"
+endpoint = f"{SUPABASE_URL}/rest/v1/users?select=id,employee_id,full_name,email,role&limit=1"
 
 def ping_supabase():
     try:
@@ -34,7 +34,4 @@ def ping_supabase():
         print(f"Ping failed: {e}")
 
 if __name__ == "__main__":
-    while True:
-        ping_supabase()
-        # Sleep 12 hours
-        time.sleep(12 * 60 * 60)
+    ping_supabase()

@@ -1,6 +1,6 @@
 # Supabase Keep-Alive Script
 
-A simple Python script that pings your Supabase database every 12 hours to prevent project pause due to inactivity.
+A simple Python script that pings your Supabase database every 10 minutes to prevent project pause due to inactivity.
 
 ## Setup (Secure)
 
@@ -24,8 +24,8 @@ A simple Python script that pings your Supabase database every 12 hours to preve
    ```
 
 4. **Scheduled Task (already created):**
-   - Windows: Task Scheduler will run the script every 12 hours
-   - Linux/macOS: Use cron (add to crontab: `0 */12 * * * /usr/bin/python3 /path/to/keepalive.py`)
+   - Windows: Task Scheduler will run the script every 10 minutes
+   - Linux/macOS: Use cron (add to crontab: `*/10 * * * * /usr/bin/python3 /path/to/keepalive.py`)
 
 ## Security Notes
 
