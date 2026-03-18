@@ -2,7 +2,11 @@ name: Supabase Heartbeat Cron
 
 on:
   schedule:
+<<<<<<< HEAD
     - cron: "*/5 * * * *"
+=======
+    - cron: "* * * * *"
+>>>>>>> afec009 ( update cron interval from 5 minutes to 1 minute for testing)
   workflow_dispatch:
 
 jobs:
@@ -25,4 +29,8 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
+<<<<<<< HEAD
         run: python keepalive.py
+=======
+        run: python keepalive.py
+>>>>>>> afec009 ( update cron interval from 5 minutes to 1 minute for testing)
